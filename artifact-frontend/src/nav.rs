@@ -30,7 +30,9 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
 
     html![<div>
         // Top Nav Bar (buttons)
-        <div class=(CLEARFIX, MB2, ACE_WHITE, ACE_BG_BLACK, P1),>
+        <div class=(CLEARFIX, MB2, ACE_WHITE, ACE_BG_BLACK, P1),
+         style="position: fixed; top: 0; width: 100%;",
+        >
             <button class=(BTN, REGULAR), id="search",
              onclick=|_| Msg::ToggleSearch,
              title="Search for an artifact.",>
@@ -60,7 +62,7 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
             </button>
 
             <button class=(BTN, REGULAR), id="sync",
-             onclick=|_| Msg::FetchProject,
+             onclick=|_| Msg::FetchProject { reload: true },
              title="Sync frontend with file system.",>
                 { fa_icon(FA_SYNC) }
                 <span class=ML1,>{ "Sync" }</span>
@@ -94,7 +96,9 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
         </div>
 
         // Embed the pages
-        <div class=(CLEARFIX, PY1),>
+        <div class=(CLEARFIX, PY1),
+         style="margin-top: 4em;",
+        >
             <div class=(SM_COL, SM_COL_6, MD_COL_4, LG_COL_2),>
                 // viewing panes
                 { error_pane(model) }

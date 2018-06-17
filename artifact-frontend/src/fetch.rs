@@ -13,12 +13,20 @@ macro_rules! create_fetch_task {
 }
 
 /// Send a request to fetch the project.
-pub(crate) fn handle_fetch_project(model: &mut Model, context: &mut Env<Context, Model>) -> bool {
+pub(crate) fn handle_fetch_project(
+    model: &mut Model,
+    context: &mut Env<Context, Model>,
+    reload: bool,
+) -> bool {
     if model.fetch_task.is_some() {
         push_logs_fetch_in_progress(model);
         false
     } else {
-        let request = jrpc::Request::new(new_rpc_id(), Method::ReadProject);
+        let request = jrpc::Request::with_params(
+            new_rpc_id(),
+            Method::ReadProject,
+            ParamsReadProject { reload: reload },
+        );
         model.fetch_task = Some(create_fetch_task!(context, request));
         false
     }

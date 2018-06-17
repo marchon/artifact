@@ -73,7 +73,9 @@ fn rpc_read_project(id: jrpc::Id, params: Option<json::Value>) -> jrpc::Response
     let locked = locked.as_mut().unwrap();
 
     if let Some(params) = params {
-        handle_read_project_params(&id, locked, params);
+        if let Err(res) = handle_read_project_params(&id, locked, params) {
+            return res;
+        }
     }
 
     jrpc::Response::success(id, json::to_value(locked).expect("serde"))
@@ -99,7 +101,14 @@ fn handle_read_project_params(
     if params.reload {
         let (lints, new_project) = match read_project(&project.project.paths.base) {
             Ok(v) => v,
-            Err(_) => unimplemented!(), // TODO: filesystem became corrupted
+            Err(err) => {
+                return Err(jrpc::Response::error(
+                    id.clone(),
+                    jrpc::ErrorCode::ServerError(-32000),
+                    ModifyErrorKind::InvalidFromLoad.to_string(),
+                    Some(json::to_value(&err).unwrap()),
+                ));
+            }
         };
         *project = ProjectResult {
             project: new_project,

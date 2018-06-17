@@ -310,7 +310,9 @@ pub(crate) enum Msg {
     SetGraphSearch(String),
 
     /// Send an HTTP request to get the project.
-    FetchProject,
+    FetchProject {
+        reload: bool,
+    },
     /// Send an HTTP update to server with the specified edit ids.
     SendUpdate(Vec<usize>),
     /// Received an OK HTTP response with the project.
