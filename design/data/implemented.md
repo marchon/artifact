@@ -10,6 +10,7 @@ Implementing artifacts is fairly straight forward:
   of its subnames through `#ART-name` or `#ART-name.sub` respectively.
 -
 
+
 # SPC-read-impl
 partof: SPC-impl
 ###
@@ -54,6 +55,7 @@ steps to construct the full `Artifact` object. We do this by:
 
 > Note: we do not worry about whether such `Name` or `SubName`s actually exist.
 > That is the job of a later linting step.
+
 
 # TST-read-impl
 Only the parsing will be fuzz tested. Joining is covered well enough by a

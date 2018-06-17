@@ -63,6 +63,7 @@ Other than that, we simply:
 - [[.lint_text_refs]]: ensure that soft references (`[[ART-name(.sub)]]`)
   all point to real things.
 
+
 # TST-read-artifact
 Although the different pieces are separated out, most of the "construction" of
 the artifact objects themselves will not be tested explicitly. Instead

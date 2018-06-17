@@ -25,7 +25,9 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
     } else {
         FA_SEARCH
     };
-    let router = model.router.clone();
+    let router1 = model.router.clone();
+    let router2 = model.router.clone();
+
     html![<div>
         // Top Nav Bar (buttons)
         <div class=(CLEARFIX, MB2, ACE_WHITE, ACE_BG_BLACK, P1),>
@@ -43,6 +45,20 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
                 <span class=ML1,>{ "Editing" }</span>
             </button>
 
+            <button class=(BTN, REGULAR), id="create",
+             onclick=|_| {
+                 let id = new_id();
+                 Msg::Batch(vec![
+                     Msg::StartEdit(id, StartEditType::New),
+                     router1.push_hash(Some(&hash_edit(id))),
+                 ])
+             },
+             title="create new artifact",
+            >
+                { fa_icon(FA_PLUS_SQUARE) }
+                <span class=ML1,>{ "Create" }</span>
+            </button>
+
             <button class=(BTN, REGULAR), id="sync",
              onclick=|_| Msg::FetchProject,
              title="Sync frontend with file system.",>
@@ -52,7 +68,7 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
 
             <button class=(BTN, REGULAR), id="graph",
              onclick=|_| {
-                router.push_hash(Some(HASH_GRAPH))
+                router2.push_hash(Some(HASH_GRAPH))
              },
              title="View Graph",
              href="#graph",
@@ -146,6 +162,11 @@ fn editing_pane(model: &Model) -> HtmlApp {
     }
 
     fn editing_name_html(id: usize, name: &str) -> HtmlApp {
+        let name = if name.is_empty() {
+            "NOT YET NAMED"
+        } else {
+            name
+        };
         html![<div>
             <a href=format!("#edit/{}", id), class=BTN,>
                 { name }
@@ -165,8 +186,10 @@ fn editing_pane(model: &Model) -> HtmlApp {
     };
 
     html![<div class=(BORDER, MR1),>
-        <div><h2 class=H2,>{ "Editing" }</h2></div>
-        <input id="search-editing",
+        <div><h2 class=H2,>
+            { "Editing" }
+        </h2></div>
+        <input id="editing-search",
          value=model.nav.editing.value.clone(),
          oninput=|e| Msg::SetNavEditing(e.value),
          class=INPUT,

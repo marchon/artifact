@@ -1,4 +1,6 @@
 # REQ-data
+partof: REQ-purpose
+###
 > This is a work in progress
 
 **These are the developer design documents. For user documents and project
@@ -83,6 +85,19 @@ The following test helpers are exported under feature flag `test-helpers`:
   which allows you to express the expected state of a project _as only data_
   and which makes clear assertions using these expected values.
 
+
+# REQ-frontend
+The frontend for artifact is probably the most important piece of design for creating
+a pleasant user experience.
+
+The frontend shall be presented as a single page application with the following
+major components:
+- [[.view]]: the user should be able to view an artifact and its relationship to other artifacts.
+- [[.edit]]: the user should be able to create, modify and delete artifacts.
+- [[.search]]: the user should be able to search artifacts and easily see how all artifacts
+  relate to each other.
+
+
 # SPC-lint
 partof: REQ-data
 ###
@@ -135,6 +150,7 @@ When printing lints (at the application level) they should be sorted and
 grouped by their categories+files. Each lint should be printed on their own
 line.
 
+
 # SPC-read
 partof: REQ-data
 ###
@@ -181,6 +197,7 @@ There are the following subparts, which are also linked in the graph above:
 - [[SPC-read-artifact]]: join the data and calculate the remaining pieces of
   the artifact.
 
+
 # SPC-test
 partof: REQ-data
 ###
@@ -200,6 +217,7 @@ There are three pieces of this requirement:
 - Definition of exported "test framework" for creating examples and assertions
   using a simple file structure.
 
+
 # TST-framework
 > TODO: make it partof REQ-data
 > partof: REQ-data
@@ -216,6 +234,7 @@ The basic design is:
     it is expected that the project is `None`.
   - `project/assert_project_lints.yaml`: expected lints from linting the project.
 - The assertion files are an exact *explicit* version of the expected project.
+
 
 # TST-fuzz
 > TODO: make it partof REQ-data
@@ -250,6 +269,7 @@ From the implementations, we can randomize testing for the following:
 - [[.load_src]]: load RawCodeLoc and have expected result
 
 [1]: https://docs.rs/quickcheck/0.4.2/quickcheck/
+
 
 # TST-read
 Testing the data deserialization and processing, as well as reserialization is a major

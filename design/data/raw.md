@@ -21,6 +21,7 @@ digraph G {
 }
 ```
 
+
 # SPC-read-raw-markdown
 An artifact in the markdown format is specified as:
 
@@ -74,6 +75,7 @@ The process for loading markdown will be:
     }
     }
     ```
+
 
 # TST-read-raw
 partof:

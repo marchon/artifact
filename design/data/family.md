@@ -68,6 +68,7 @@ A node can always be partof another node of the same type. In addition, the foll
 
 ```
 
+
 # SPC-read-family
 The method of determining family is fairly straightforward, as is
 detailed in the graph below:
@@ -106,6 +107,7 @@ Note: make sure to ONLY link to artifacts that exists!
 
 # [[.deauto]]
 In order to reserialize the artifacts, their "auto" partof has to be unlinked
+
 
 # TST-read-family
 partof: TST-fuzz
