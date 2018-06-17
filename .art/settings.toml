@@ -4,6 +4,10 @@ exclude_artifact_paths = []
 
 code_paths = [
     "/src",
+    "/artifact-ser/src",
+    "/artifact-lib/src",
+    "/artifact-data/src",
+    "/artifact-frontend/src",
     # "target/fakecode",
     # "{repo}/design",
     # "{repo}/web-ui/src",

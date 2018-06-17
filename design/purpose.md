@@ -36,9 +36,16 @@ The design of artifact is split into several sub-modules
 
 
 # REQ-web
+partof: REQ-purpose
+###
 The web interface for artifact should be designed to behave very similar to the 
 CLI/text based interface, except it should take advantage of everything that a web
 interface can.
+
+Main attributes:
+- Works directly on the file system. Any database introduced should only be used for improving performance (invisible to the user).
+- [[.secure]]: this is definitely TODO, not sure how it will be accomplished ATM. Probably just require non-local host hosting to require a password and use HTTPS (nothing crazy).
+- Fast for _single users and small groups_. Explicitly not designed as a whole org editing portal, users are encouraged to make small changes and use existing code review tools for changing design docs.
 
 # Architecture
 The basic architecture of the web UI is split into two components:

@@ -251,6 +251,14 @@ impl Method {
     }
 }
 
+/// Optional parameters for the `ReadProject` method.
+#[derive(Copy, Clone, Eq, PartialEq, Debug, Serialize, Deserialize)]
+pub struct ParamsReadProject {
+    /// Force the backend to reread/reload the artifacts.
+    pub reload: bool,
+}
+
+
 // ------ HELPERS ------
 
 /// Inplace trim is annoyingly not in the stdlib
@@ -268,6 +276,7 @@ pub fn clean_text(s: &mut String) {
     }
 }
 
+/// #SPC-read-family.deauto
 /// Strip the automatic family from the `partof` set.
 pub fn strip_auto_partofs(name: &Name, names: &mut IndexSet<Name>) {
     if let Some(p) = name.parent() {

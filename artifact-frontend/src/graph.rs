@@ -191,26 +191,29 @@ pub(crate) fn subname_dot(model: &Model, name: &str, sub: &SubName) -> String {
         Ok(n) => n,
         Err(_) => return subname_raw(sub, None),
     };
-    if model
+
+    let color = if model
         .shared
         .get_impl(name.as_str(), Some(sub.as_str()))
-        .is_err()
+        .is_ok()
     {
-        return subname_raw(sub, None);
-    }
+        BLUE
+    } else {
+        RED
+    };
 
-    subname_raw(sub, Some(&format!("style=filled; fillcolor=\"{}\"", BLUE)))
+    subname_raw(sub, Some(&format!("penwidth=1.5; fontcolor=\"{}\"", color)))
 }
 
 fn subname_raw(sub: &SubName, attrs: Option<&str>) -> String {
-    let attrs = attrs.unwrap_or("penwidth=1.5");
+    let attrs = attrs.unwrap_or("style=filled; fillcolor=\"#DCDEE2\"");
     format!(
         r##"
         {{
             "{sub_key}" [
                 label="{sub}";
-                fontsize=12; margin=0.01;
-                shape=box;
+                fontsize=12; margin=0.15;
+                shape=cds;
                 {attrs};
             ]
         }}

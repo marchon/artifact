@@ -86,7 +86,9 @@ The following test helpers are exported under feature flag `test-helpers`:
   and which makes clear assertions using these expected values.
 
 
-# REQ-frontend
+# SPC-frontend
+partof: REQ-web
+###
 The frontend for artifact is probably the most important piece of design for creating
 a pleasant user experience.
 
@@ -219,6 +221,8 @@ There are three pieces of this requirement:
 
 
 # TST-framework
+partof: REQ-purpose
+###
 > TODO: make it partof REQ-data
 > partof: REQ-data
 > ###
