@@ -67,19 +67,14 @@ Other than that, we simply:
 # TST-read-artifact
 Although the different pieces are separated out, most of the "construction" of
 the artifact objects themselves will not be tested explicitly. Instead
-we will rely on the framework to quickly test user scenarios and the already
-existing fuzz framework for more end-to-end tests.
-
-Sanity tests can be added as-needed for each component.
-
-The following sanity tests shall exist:
-- [[.partofs]]: sanity test making sure `partofs` are properly determined.
-- [[.completed]]: sanity test computing the `Completed` fields.
+we will rely on the framework to quickly test user scenarios.
 
 The major testing will be done using the interop framework. The following
 test cases should be implemented:
 - [[.empty]]: `empty` project that contains only empty artifact files.
   and no source code.
+- [[.source_only]]: a project containing only source code (no design docs).
+- [[.source_invalid]]: a project containing invalid source code (invalid links).
 - [[.design_only]]: a project containing only design documents (none of the
   artifacts implemented).
   - This is mostly to test that artifact parsing works and linking works

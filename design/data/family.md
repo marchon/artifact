@@ -104,26 +104,3 @@ Note: make sure to ONLY link to artifacts that exists!
 
 # [[.deauto]]
 In order to reserialize the artifacts, their "auto" partof has to be unlinked
-
-
-# TST-read-family
-partof: TST-fuzz
-###
-Very low level, so no interop testing.
-
-### Sanity Tests
-- [[.parent]]: basic checks that `Name::parent()` works as expected.
-- [[.auto_partof]]: basic checks that `Name::auto_partof()` works as expected.
-- [[.collapse]]: sanity test for collapsing names.
-- [[.collapse_invalid]]: sanity test invalid collapsing strings.
-
-### Fuzz Tests
-- [[.fuzz_parent]]: use the fuzzed name to determine the parent in a different
-  way than the code and validate that they are identical
-- [[.fuzz_auto_partof]]: use the fuzzed name to determine the auto_partof
-  in a different way than the code and validate that they are identical
-- [[.fuzz_auto_partof]]: use the fuzzed name to determine the auto_partof
-  in a different way than the code and validate that they are identical
-- [[.fuzz_collapse]]: fuzz that the names can be expaneded and
-  collapsed.
-- [[.fuzz_serde]]: fuzz that names can be serialized/deserialized.

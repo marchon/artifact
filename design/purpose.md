@@ -38,7 +38,7 @@ The design of artifact is split into several sub-modules
 # REQ-web
 partof: REQ-purpose
 ###
-The web interface for artifact should be designed to behave very similar to the 
+The web interface for artifact should be designed to behave very similar to the
 CLI/text based interface, except it should take advantage of everything that a web
 interface can.
 
@@ -55,3 +55,72 @@ The basic architecture of the web UI is split into two components:
 - [[REQ-frontend]]: the frontend will be a single page application which accomplishes
   a majority of the goals of artifact, including real-time feedback, graphing and
   visualization of requirements. It and the CLI are the two major "user facing" components of artifact.
+
+# TST-unit
+done: "done per specification."
+partof:
+- SPC-name
+- SPC-read-family
+- SPC-read-impl
+- SPC-artifact
+###
+
+Several low level specifications can be covered almost completely with unit
+and fuzz testing ([[TST-fuzz]]) testing.
+
+In order for an item to consider itself "unit tested" it must:
+- test boundary conditions
+- test error conditions
+- test "sanity" use cases (standard use cases)
+
+
+# Implementations
+- [[.raw_name]]
+- [[.name]]
+- [[.family]]: this also inclused auto partofs as well as collapsing/expanding
+  partof.
+- [[.read_impl]]
+- [[.artifact]]
+
+# TST-fuzz
+done: "done per specification."
+partof:
+- SPC-name
+- SPC-read-family
+- SPC-read-impl
+- SPC-artifact
+###
+
+All data objects shall be designed from the beginning to be fuzz tested, so
+that even complex "projects" can be built up with random collections of
+artifacts in differing states.
+
+Obviously this will also allow for fast fuzz testing of the smaller objects themselves.
+
+The major workhorse here will be the [quickcheck][1] library. The following datatypes
+will have `Abitrary` implemented for them and releated tests performed against them:
+- `Name` (and by extension `Partof`)
+- `InvalidName`
+- `RawArtifact`
+  - `Done`
+  - `CodeRef`
+  - `CodeLoc`
+  - `Text`
+- `RawCodeLoc`: simply a file with given code references inserted at random.
+- `HashMap<Name, RawArtifact>`
+- etc.
+
+Fuzz testing will then involve the following:
+- positive fuzz tests: it should handle all generated cases that are expected
+  to work.
+- negative fuzz tests: it should handle all generated cacses that are expected
+  to fail properly.
+
+[1]: https://docs.rs/quickcheck/0.4.2/quickcheck/
+
+# Implementations
+- [[.raw_name]]
+- [[.name]]
+- [[.family]]
+- [[.read_impl]]
+- [[.artifact]]
