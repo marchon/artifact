@@ -4,19 +4,12 @@ exclude_artifact_paths = []
 
 code_paths = [
     "/src",
-    "/artifact-ser/src",
     "/artifact-lib/src",
+    "/artifact-ser/src",
     "/artifact-data/src",
+    "/artifact-test/src",
     "/artifact-frontend/src",
-    # "target/fakecode",
-    # "{repo}/design",
-    # "{repo}/web-ui/src",
-    # "{repo}/web-ui/tests",
-    # "{repo}/web-ui/sel_tests",
 ]
 
 exclude_code_paths = [
-    # "src/serve/data/web-ui.tar"
 ]
-
-file_type = "markdown"

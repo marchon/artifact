@@ -132,18 +132,24 @@ fn clear_logs(model: &mut Model, clear: ClearLogs) {
 
 impl Renderable<Context, Model> for Model {
     fn view(&self) -> HtmlApp {
-        let out = match self.view {
+        let view = match self.view {
             View::Graph => graph::graph_html(self),
             View::Artifact(ref name) => artifact::view_artifact(self, name),
             View::Edit(id) => edit::view_edit(self, id),
-            View::NotFound => html![
-                <div class=BOLD,>
-                    { "Page not found" }
-                </div>
-            ],
+            View::NotFound => {
+                let page = html![
+                    <div class=BOLD,>
+                        { "Page not found" }
+                    </div>
+                ];
+                ViewResult {
+                    page,
+                    nav_extra: None,
+                }
+            }
         };
 
-        nav::view_nav(self, out)
+        nav::view_nav(self, view)
     }
 }
 

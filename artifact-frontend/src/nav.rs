@@ -18,7 +18,7 @@
 use dev_prelude::*;
 use name;
 
-pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
+pub(crate) fn view_nav(model: &Model, view: ViewResult) -> HtmlApp {
     let search = &model.nav.search;
     let icon_search = if search.on {
         FA_SEARCH_MINUS
@@ -93,6 +93,8 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
                 <span>{ "TEST" }</span>
             </button>
 
+            { view.nav_extra.unwrap_or_else(|| html![<>{ "|" }</>]) }
+
         </div>
 
         // Embed the pages
@@ -108,7 +110,7 @@ pub(crate) fn view_nav(model: &Model, page: HtmlApp) -> HtmlApp {
 
             <div class=(SM_COL, SM_COL_11, MD_COL_7, LG_COL_9),>
                 // rest of page
-                { page }
+                { view.page }
             </div>
         </div>
     </div>]

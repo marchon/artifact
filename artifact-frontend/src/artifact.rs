@@ -18,16 +18,21 @@ use dev_prelude::*;
 use graph;
 use view;
 
-pub(crate) fn view_artifact(model: &Model, name: &Name) -> HtmlApp {
-    match model.shared.artifacts.get(name) {
+pub(crate) fn view_artifact(model: &Model, name: &Name) -> ViewResult {
+    let page = match model.shared.artifacts.get(name) {
         Some(ref art) => view_existing_artifact(model, art),
         None => {
-            return html![
-            <div><h3 class=H3,>
-                {format!("Artifact with name {:?} not found", name)}
-            </h3></div>
-        ]
+            html![
+                <div><h3 class=H3,>
+                    {format!("Artifact with name {:?} not found", name)}
+                </h3></div>
+            ]
         }
+    };
+
+    ViewResult {
+        page,
+        nav_extra: None,
     }
 }
 
